@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMR</title>
+<meta name="description" content="Personal quick-access terminal for cheatsheets, payloads and hacking resources.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070707'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%23c1444b' stroke-width='5'/%3E%3Ctext x='32' y='44' font-family='monospace' font-weight='bold' font-size='30' fill='%23c1444b' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sysinfo" id="sysinfo">
+  <div class="sysinfo-cmd"><span id="si-cmd"></span><span class="cursor cursor-sm" id="si-cur"></span></div>
+  <div class="sysinfo-output" id="si-output" hidden>
+    <div class="sysinfo-handle" id="si-handle"></div>
+    <div class="sysinfo-tag" id="si-tag"></div>
+    <div class="sysinfo-divider"></div>
+    <div class="sysinfo-row"><span class="status-dot"></span><span class="k">status</span><span class="badge" id="si-status"></span></div>
+    <div class="sysinfo-row"><span class="dot-spacer"></span><span class="k">ip</span><span class="v" id="si-ip"></span></div>
+  </div>
+  <div class="whoami-pop" id="whoami-pop" hidden>
+    <div class="whoami-pop-uid">uid=0(root) gid=0(root) groups=0(root)</div>
+  </div>
+</aside>
+
+<main class="term">
+  <div class="term-window">
+    <div class="term-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="path">guest@mmr:~</span>
+    </div>
+    <div class="term-body">
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~$ </span><span id="typed"></span><span class="cursor" id="cur1"></span></p>
+
+      <div class="listing" id="listing" hidden>
+        <p class="total">total 7</p>
+        <span class="dirline">drwxr-xr-x  .</span>
+        <span class="dirline">drwxr-xr-x  ..</span>
+        <a class="row fade-in" href="cheatsheets.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./cheatsheets</span><span class="sep2"></span><span class="desc"># searchable payloads — Bug Bounty &amp; Pentesting</span></a>
+        <a class="row fade-in" href="web.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./web</span><span class="sep2"></span><span class="desc"># web hacking — cheatsheets, payloads, dorks, bug bounty</span></a>
+        <a class="row fade-in" href="recon.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./recon</span><span class="sep2"></span><span class="desc"># OSINT &amp; DNS recon</span></a>
+        <a class="row fade-in" href="privesc.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./privesc</span><span class="sep2"></span><span class="desc"># privilege escalation &amp; post-exploitation</span></a>
+        <a class="row fade-in" href="shells.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./shells</span><span class="sep2"></span><span class="desc"># reverse shells + live generator</span></a>
+        <a class="row fade-in" href="exploits.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./exploits</span><span class="sep2"></span><span class="desc"># CVEs &amp; exploit databases</span></a>
+        <a class="row fade-in" href="practice.html"><span class="perm">drwxr-xr-x</span><span class="sep2"></span><span class="name">./ctf</span><span class="sep2"></span><span class="desc"># labs &amp; practice platforms</span></a>
+      </div>
+
+      <p class="line" id="line2" hidden><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~$ </span>grep -ri "<input type="text" id="home-search" class="home-search-input" autocomplete="off" spellcheck="false" placeholder="anything on the site...">"</p>
+
+      <div class="listing" id="home-results"></div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/site-index.js"></script>
+<script src="assets/js/boot.js"></script>
+<script src="assets/js/home-search.js"></script>
+<script src="assets/js/sysinfo.js"></script>
+
+</body>
+</html>

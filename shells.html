@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMR — shells</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070707'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%23c1444b' stroke-width='5'/%3E%3Ctext x='32' y='44' font-family='monospace' font-weight='bold' font-size='30' fill='%23c1444b' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<aside class="sysinfo" id="sysinfo">
+  <div class="sysinfo-cmd"><span id="si-cmd"></span><span class="cursor cursor-sm" id="si-cur"></span></div>
+  <div class="sysinfo-output" id="si-output" hidden>
+    <div class="sysinfo-handle" id="si-handle"></div>
+    <div class="sysinfo-tag" id="si-tag"></div>
+    <div class="sysinfo-divider"></div>
+    <div class="sysinfo-row"><span class="status-dot"></span><span class="k">status</span><span class="badge" id="si-status"></span></div>
+    <div class="sysinfo-row"><span class="dot-spacer"></span><span class="k">ip</span><span class="v" id="si-ip"></span></div>
+  </div>
+  <div class="whoami-pop" id="whoami-pop" hidden>
+    <div class="whoami-pop-uid">uid=0(root) gid=0(root) groups=0(root)</div>
+  </div>
+</aside>
+
+<main class="term">
+  <div class="term-window">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="path">guest@mmr:~/shells</span><a class="cdup" href="index.html">cd ..</a></div>
+    <div class="term-body">
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~$ </span>cd ./shells</p>
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/shells$ </span>./genshell.sh</p>
+
+      <div class="gen">
+        <p class="gen-cmdline"># set your listener IP/port — commands below update live. click a row to copy.</p>
+        <div class="gen-fields">
+          <div class="gen-field"><label for="ip">--ip</label><input id="ip" value="10.10.10.10" autocomplete="off" spellcheck="false"></div>
+          <div class="gen-field"><label for="port">--port</label><input id="port" value="4444" inputmode="numeric" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <div class="gen-out" id="genOut"></div>
+      </div>
+
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/shells$ </span>ls -la</p>
+      <div class="listing">
+        <p class="total">total 3</p>
+        <a class="row" href="https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">pentestmonkey-cheatsheet.md</span><span class="sep2"></span><span class="desc"># reverse shells in every language imaginable</span></a>
+        <a class="row" href="https://www.revshells.com/" target="_blank" rel="noopener noreferrer"><span class="perm">-rwxr-xr-x</span><span class="sep2"></span><span class="name">revshells.com</span><span class="sep2"></span><span class="desc"># generator — huge list, encodings, msfvenom</span></a>
+        <a class="row" href="https://weibell.github.io/reverse-shell-generator/" target="_blank" rel="noopener noreferrer"><span class="perm">-rwxr-xr-x</span><span class="sep2"></span><span class="name">reverse-shell-generator</span><span class="sep2"></span><span class="desc"># alternate generator, by weibell</span></a>
+      </div>
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/shells$ </span><span class="cursor"></span></p>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/genshell.js"></script>
+<script src="assets/js/sysinfo.js"></script>
+
+</body>
+</html>

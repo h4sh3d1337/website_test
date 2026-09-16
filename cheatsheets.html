@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMR — cheatsheets</title>
+<meta name="description" content="Searchable payload reference for Bug Bounty and Pentesting.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070707'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%23c1444b' stroke-width='5'/%3E%3Ctext x='32' y='44' font-family='monospace' font-weight='bold' font-size='30' fill='%23c1444b' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="cs-app">
+  <div class="term-window">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="path">guest@mmr:~/cheatsheets</span><a class="cdup" href="index.html">cd ..</a></div>
+
+    <div class="cs-body">
+      <nav class="cs-sidebar">
+        <div class="cs-tracks" id="cs-tracks"></div>
+        <div class="cs-cat-head" id="cs-cat-head"><span>categories</span><button type="button" class="cs-clear" id="cs-clear" hidden>clear</button></div>
+        <div class="cs-catlist" id="cs-catlist"></div>
+
+        <div class="cs-tools-head">tools</div>
+        <button type="button" class="cs-tool-btn" id="cs-decoder-btn">./codec.sh</button>
+      </nav>
+
+      <div class="cs-main">
+        <div id="cs-browser">
+          <p class="cs-intro" id="cs-intro"></p>
+
+          <div class="pt-vars" id="pt-vars" hidden>
+            <p class="pt-vars-head"># fill in what you have — every command below updates live, unset ones stay as {TOKENS}</p>
+            <div class="pt-vars-grid">
+              <div class="pt-var"><label for="pv-ip">--ip</label><input id="pv-ip" data-var="IP" placeholder="10.10.10.10" autocomplete="off" spellcheck="false"></div>
+              <div class="pt-var"><label for="pv-domain">--domain</label><input id="pv-domain" data-var="DOMAIN" placeholder="domain.local" autocomplete="off" spellcheck="false"></div>
+              <div class="pt-var"><label for="pv-dc">--dc</label><input id="pv-dc" data-var="DC" placeholder="dc01.domain.local" autocomplete="off" spellcheck="false"></div>
+              <div class="pt-var"><label for="pv-user">--user</label><input id="pv-user" data-var="USER" placeholder="administrator" autocomplete="off" spellcheck="false"></div>
+              <div class="pt-var"><label for="pv-pass">--pass</label><input id="pv-pass" data-var="PASS" placeholder="Password123!" autocomplete="off" spellcheck="false"></div>
+              <div class="pt-var"><label for="pv-hash">--hash</label><input id="pv-hash" data-var="HASH" placeholder="&lt;NTLM-hash&gt;" autocomplete="off" spellcheck="false"></div>
+            </div>
+          </div>
+
+          <div class="pt-vars" id="bb-vars" hidden>
+            <p class="pt-vars-head"># set your target domain — dorks and recon commands below update live</p>
+            <div class="pt-vars-grid">
+              <div class="pt-var"><label for="bv-domain">--domain</label><input id="bv-domain" data-var="DOMAIN" placeholder="target.com or *.target.com" autocomplete="off" spellcheck="false"></div>
+            </div>
+          </div>
+
+          <div class="cs-search">
+            <span class="prompt">grep -i</span>
+            <input type="text" id="cs-search" placeholder="search payloads, e.g. redis, jwt, kerberoast..." autocomplete="off" spellcheck="false">
+            <span class="count" id="cs-count"></span>
+          </div>
+
+          <div class="cs-cards-grid" id="cs-cards"></div>
+          <div class="cs-pagination" id="cs-pagination"></div>
+
+          <div class="cs-sources">
+            <h2># further reading — the sources behind this list</h2>
+            <div class="listing">
+              <a class="row" href="https://github.com/swisskyrepo/PayloadsAllTheThings" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">PayloadsAllTheThings</span><span class="sep2"></span><span class="desc"># the full, exhaustive version of everything here</span></a>
+              <a class="row" href="https://book.hacktricks.wiki/" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">HackTricks</span><span class="sep2"></span><span class="desc"># deep-dive methodology for every category here</span></a>
+              <a class="row" href="https://github.com/s0md3v/AwesomeXSS" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">AwesomeXSS</span><span class="sep2"></span><span class="desc"># curated XSS payloads, polyglots and context-breaking tricks</span></a>
+              <a class="row" href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">PortSwigger XSS Cheat Sheet</span><span class="sep2"></span><span class="desc"># payloads filterable by injection context</span></a>
+              <a class="row" href="https://github.com/cujanovic/SSRF-Testing" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">SSRF-Testing</span><span class="sep2"></span><span class="desc"># cujanovic's SSRF payload and bypass collection</span></a>
+              <a class="row" href="https://github.com/payload-box/ssti-advanced-payload-list" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">ssti-advanced-payload-list</span><span class="sep2"></span><span class="desc"># 2000+ SSTI payloads across template engines</span></a>
+              <a class="row" href="https://github.com/chenjj/CORScanner" target="_blank" rel="noopener noreferrer"><span class="perm">-rwxr-xr-x</span><span class="sep2"></span><span class="name">CORScanner</span><span class="sep2"></span><span class="desc"># automated CORS misconfiguration scanner</span></a>
+              <a class="row" href="https://github.com/TakSec/google-dorks-bug-bounty" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">google-dorks-bug-bounty</span><span class="sep2"></span><span class="desc"># TakSec's dork list — the source for the Google Dorks category</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div id="cs-decoder" class="dc-panel" hidden>
+          <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/cheatsheets$ </span>./codec.sh --interactive<span class="cursor cursor-sm"></span></p>
+          <p class="cs-intro">Pick an operation below — it runs immediately against the input. Paste the output back into the input to chain steps by hand. Everything runs locally in your browser, nothing is sent anywhere.</p>
+
+          <div class="dc-io">
+            <div class="dc-field">
+              <label for="dc-input">stdin</label>
+              <textarea id="dc-input" spellcheck="false" placeholder="paste text, base64, hex, a JWT..."></textarea>
+            </div>
+            <div class="dc-field">
+              <div class="dc-field-head">
+                <label for="dc-output">stdout</label>
+                <button type="button" class="copy-btn" id="dc-copy">copy</button>
+              </div>
+              <textarea id="dc-output" spellcheck="false" readonly placeholder="&gt; output appears here"></textarea>
+            </div>
+          </div>
+
+          <div class="dc-key-field" id="dc-key-field" hidden>
+            <span class="prompt">--key</span>
+            <input type="text" id="dc-key" placeholder="xor key" autocomplete="off" spellcheck="false">
+          </div>
+
+          <div class="dc-ops-wrap">
+            <div class="dc-ops-head"><span class="lbl">$ codec</span><span class="active" id="dc-active">--help</span></div>
+            <div class="dc-ops" id="dc-ops"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="assets/js/cheatsheets-data.js"></script>
+<script src="assets/js/cheatsheets.js"></script>
+<script src="assets/js/decoder.js"></script>
+
+</body>
+</html>
