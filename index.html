@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script src="assets/js/theme-init.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MMR</title>
 <meta name="description" content="Personal quick-access terminal for cheatsheets, payloads and hacking resources.">
@@ -9,6 +10,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle light theme">
+  <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+  <span class="theme-toggle-label" id="theme-toggle-label">dark</span>
+</button>
 
 <aside class="sysinfo" id="sysinfo">
   <div class="sysinfo-cmd"><span id="si-cmd"></span><span class="cursor cursor-sm" id="si-cur"></span></div>
@@ -57,6 +63,8 @@
 <script src="assets/js/boot.js"></script>
 <script src="assets/js/home-search.js"></script>
 <script src="assets/js/sysinfo.js"></script>
+
+<script src="assets/js/theme-toggle.js"></script>
 
 </body>
 </html>

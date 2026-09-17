@@ -7,7 +7,7 @@
 }
 
 :root{
-  --black:#070707;
+  --bg:#070707;
   --border:#2a2a2a;
   --border-soft:#1a1a1a;
   --fg:#d6d6d6;
@@ -17,6 +17,49 @@
   --red-bright:#e0656c;
   --red-dim:#5c2528;
   --mono:'JetBrains Mono',ui-monospace,'Cascadia Code','SFMono-Regular',Consolas,'Liberation Mono',monospace;
+
+  --panel:rgba(7,7,7,.55);
+  --panel-soft:rgba(7,7,7,.5);
+  --panel-menu:rgba(7,7,7,.97);
+  --overlay-soft:rgba(255,255,255,.015);
+  --overlay-hover:rgba(255,255,255,.045);
+  --shadow-menu:rgba(0,0,0,.65);
+  --field-bg:rgba(0,0,0,.2);
+  --red-glow:rgba(193,68,75,.6);
+  --vignette-tint:rgba(193,68,75,.11);
+  --vignette-mid:rgba(0,0,0,.4);
+  --vignette-end:rgba(0,0,0,.68);
+  --photo-opacity:.28;
+}
+
+/* Light theme: same brand (gray + brick red) inverted, not a generic invert —
+   reds deepen instead of lighten so they keep contrast/emphasis against a light
+   ground, and the vignette fades up to the page gray instead of down to black.
+   The page background sits a step darker than the terminal panel on purpose —
+   flat near-white-on-near-white made the window unreadable against the page. */
+:root[data-theme="light"]{
+  --bg:#c2c2be;
+  --border:#7d7d76;
+  --border-soft:#9c9c95;
+  --fg:#1c1c1a;
+  --fg-dim:#55554f;
+  --fg-faint:#84847c;
+  --red:#a12e37;
+  --red-bright:#7a1a21;
+  --red-dim:#94555c;
+
+  --panel:rgba(216,215,210,.92);
+  --panel-soft:rgba(216,215,210,.88);
+  --panel-menu:rgba(224,223,218,.98);
+  --overlay-soft:rgba(0,0,0,.045);
+  --overlay-hover:rgba(0,0,0,.055);
+  --shadow-menu:rgba(0,0,0,.3);
+  --field-bg:rgba(0,0,0,.07);
+  --red-glow:rgba(161,46,55,.4);
+  --vignette-tint:rgba(161,46,55,.06);
+  --vignette-mid:rgba(194,194,190,.4);
+  --vignette-end:rgba(194,194,190,.8);
+  --photo-opacity:.2;
 }
 
 *{box-sizing:border-box;}
@@ -27,12 +70,15 @@ body{
   position:relative;
   isolation:isolate;
   min-height:100vh;
-  background:var(--black);
+  background:var(--bg);
   color:var(--fg);
   font-family:var(--mono);
   font-size:14px;
   line-height:1.6;
   overflow-x:hidden;
+}
+@media (prefers-reduced-motion: no-preference){
+  body{transition:background-color .2s ease, color .2s ease;}
 }
 
 ::selection{background:var(--red-dim);color:#fff;}
@@ -49,7 +95,7 @@ body::before{
   background-position:center 8%;
   background-repeat:no-repeat;
   filter:grayscale(1) contrast(1.1);
-  opacity:.28;
+  opacity:var(--photo-opacity);
 }
 body::after{
   content:"";
@@ -57,8 +103,8 @@ body::after{
   inset:0;
   z-index:-1;
   background:
-    radial-gradient(ellipse at 50% 25%, rgba(193,68,75,.11), transparent 55%),
-    linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.68) 55%, #070707 100%);
+    radial-gradient(ellipse at 50% 25%, var(--vignette-tint), transparent 55%),
+    linear-gradient(180deg, var(--vignette-mid) 0%, var(--vignette-end) 55%, var(--bg) 100%);
 }
 
 /* ---------- terminal window ---------- */
@@ -71,7 +117,7 @@ body::after{
 .term-window{
   border:1px solid var(--border);
   border-radius:6px;
-  background:rgba(7,7,7,.55);
+  background:var(--panel);
   backdrop-filter:blur(1px);
   overflow:hidden;
 }
@@ -131,7 +177,7 @@ body::after{
   margin:0 -8px;
   border-radius:3px;
 }
-.row:hover, .row:focus-visible{background:rgba(255,255,255,.045);}
+.row:hover, .row:focus-visible{background:var(--overlay-hover);}
 .row:focus-visible{outline:1px solid var(--fg-faint);}
 .perm{color:var(--fg-faint);flex:none;}
 .sep2{display:inline-block;width:18px;flex:none;}
@@ -177,7 +223,7 @@ body::after{
   border:1px solid var(--border-soft);
   border-radius:4px;
   padding:8px 10px;
-  background:rgba(7,7,7,.5);
+  background:var(--panel-soft);
   backdrop-filter:blur(1px);
   font-size:11px;
   line-height:1.9;
@@ -194,7 +240,7 @@ body::after{
 .sysinfo-handle .mirror{display:inline-block;transform:scaleX(-1);}
 .sysinfo-tag{color:var(--fg-dim);font-size:11px;margin-top:1px;}
 
-.scramble-active{text-shadow:0 0 7px rgba(193,68,75,.6);}
+.scramble-active{text-shadow:0 0 7px var(--red-glow);}
 
 .sysinfo-divider{border-top:1px solid var(--border-soft);margin:10px 0 8px;}
 
@@ -246,11 +292,11 @@ body::after{
   position:fixed;
   z-index:100;
   min-width:190px;
-  background:rgba(7,7,7,.97);
+  background:var(--panel-menu);
   border:1px solid var(--red-dim);
   border-radius:6px;
   padding:6px;
-  box-shadow:0 12px 34px rgba(0,0,0,.65);
+  box-shadow:0 12px 34px var(--shadow-menu);
 }
 .ctxmenu .ctx-label{
   color:var(--fg-faint);
@@ -281,7 +327,7 @@ body::after{
   border-radius:6px;
   padding:16px 18px;
   margin:18px 0 24px;
-  background:rgba(255,255,255,.015);
+  background:var(--overlay-soft);
 }
 .gen-cmdline{margin:0 0 12px;color:var(--fg-dim);font-size:13px;}
 .gen-fields{
@@ -439,7 +485,7 @@ body::after{
   text-align:left;
   cursor:pointer;
 }
-.cs-cat-item:hover{background:rgba(255,255,255,.04);color:var(--fg);}
+.cs-cat-item:hover{background:var(--overlay-hover);color:var(--fg);}
 .cs-cat-item.is-active{border-color:var(--red-dim);background:rgba(193,68,75,.1);color:var(--red-bright);}
 .cs-cat-item .cnt{color:var(--fg-faint);font-size:10.5px;flex:none;}
 .cs-cat-item.is-active .cnt{color:var(--red-dim);}
@@ -460,7 +506,7 @@ body::after{
   border:1px solid var(--border);
   border-radius:4px;
   padding:5px 9px;
-  background:rgba(0,0,0,.2);
+  background:var(--field-bg);
 }
 .pt-var label{color:var(--red);font-size:11.5px;flex:none;}
 .pt-var input{
@@ -519,7 +565,7 @@ body::after{
   border-radius:4px;
   padding:9px 11px;
   margin-bottom:9px;
-  background:rgba(255,255,255,.015);
+  background:var(--overlay-soft);
 }
 .card-code-row code{
   flex:1;
@@ -589,7 +635,7 @@ body::after{
   width:100%;
   min-height:220px;
   resize:vertical;
-  background:rgba(255,255,255,.015);
+  background:var(--overlay-soft);
   border:1px solid var(--border-soft);
   border-radius:4px;
   padding:10px 12px;
@@ -640,7 +686,7 @@ body::after{
   padding:5px 10px;
   border:1px solid var(--border);
   border-radius:3px;
-  background:rgba(255,255,255,.015);
+  background:var(--overlay-soft);
   color:var(--red-dim);
   font-family:var(--mono);
   font-size:11.5px;
@@ -684,4 +730,53 @@ body::after{
   .sysinfo{top:16px;left:16px;min-width:0;max-width:calc(100vw - 32px);}
   .gen-field input{width:90px;}
   .cs-tracks{flex-direction:column;}
+  .theme-toggle{top:16px;right:16px;padding:5px 9px 5px 6px;}
+  .theme-toggle-label{display:none;}
 }
+
+/* ---------- theme toggle (top-right, every page) ---------- */
+.theme-toggle{
+  position:absolute;
+  top:20px;
+  right:24px;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:5px 12px 5px 6px;
+  background:var(--panel-soft);
+  backdrop-filter:blur(1px);
+  color:var(--fg-dim);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.03em;
+  cursor:pointer;
+}
+.theme-toggle:hover, .theme-toggle:focus-visible{border-color:var(--red-dim);color:var(--fg);}
+.theme-toggle:focus-visible{outline:1px solid var(--red-dim);outline-offset:2px;}
+.theme-toggle-track{
+  position:relative;
+  width:28px;
+  height:15px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--field-bg);
+  flex:none;
+}
+.theme-toggle-thumb{
+  position:absolute;
+  top:2px;
+  left:2px;
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 4px var(--red-glow);
+}
+@media (prefers-reduced-motion: no-preference){
+  .theme-toggle-thumb{transition:transform .25s ease;}
+}
+:root[data-theme="light"] .theme-toggle-thumb{transform:translateX(13px);}
+.theme-toggle-label{min-width:26px;text-align:left;}

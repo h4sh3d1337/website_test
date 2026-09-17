@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script src="assets/js/theme-init.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MMR — web</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070707'/%3E%3Crect x='4' y='4' width='56' height='56' rx='11' fill='none' stroke='%23c1444b' stroke-width='5'/%3E%3Ctext x='32' y='44' font-family='monospace' font-weight='bold' font-size='30' fill='%23c1444b' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<button type="button" id="theme-toggle" class="theme-toggle" aria-pressed="false" aria-label="Toggle light theme">
+  <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+  <span class="theme-toggle-label" id="theme-toggle-label">dark</span>
+</button>
 
 <aside class="sysinfo" id="sysinfo">
   <div class="sysinfo-cmd"><span id="si-cmd"></span><span class="cursor cursor-sm" id="si-cur"></span></div>
@@ -66,12 +72,22 @@
         <a class="row" href="https://github.com/devanshbatham/Awesome-Bugbounty-Writeups" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">awesome-bugbounty-writeups/</span><span class="sep2"></span><span class="desc"># writeups sorted by bug type</span></a>
       </div>
 
-      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/web/bugbounty$ </span><span class="cursor"></span></p>
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/web/bugbounty$ </span>cd ../bookmarklets &amp;&amp; ls -la</p>
+      <div class="listing">
+        <p class="total">total 3</p>
+        <a class="row" href="https://github.com/gl0bal01/bookmarklets" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">gl0bal01-bookmarklets/</span><span class="sep2"></span><span class="desc"># 13 recon bookmarklets — extract every link, scan 80+ paths for sensitive files, expose hidden HTML</span></a>
+        <a class="row" href="https://github.com/K2SOsint/Bookmarklets" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">k2sosint-bookmarklets/</span><span class="sep2"></span><span class="desc"># find hidden emails/links in page source, tech stack via BuiltWith, robots.txt/sitemap.xml discovery</span></a>
+        <a class="row" href="https://gist.github.com/robbiet480/4711696" target="_blank" rel="noopener noreferrer"><span class="perm">-rw-r--r--</span><span class="sep2"></span><span class="name">reveal-password.js</span><span class="sep2"></span><span class="desc"># flips every password input to type=text so you can read what's behind the dots</span></a>
+      </div>
+
+      <p class="line"><span class="prompt-user">guest@mmr</span><span class="prompt-sep">:~/web/bookmarklets$ </span><span class="cursor"></span></p>
     </div>
   </div>
 </main>
 
 <script src="assets/js/sysinfo.js"></script>
+
+<script src="assets/js/theme-toggle.js"></script>
 
 </body>
 </html>
