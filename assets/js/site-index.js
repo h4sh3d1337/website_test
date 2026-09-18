@@ -63,7 +63,7 @@ const SITE_CS_GROUPS = [
   { track:'bugbounty', cat:'xxe', label:'XXE', titles:['Classic file read','Blind OOB via external DTD','XXE via SVG upload','Parameter entity recursion'] },
   { track:'bugbounty', cat:'command-injection', label:'Command Injection', titles:['Basic chaining','Blind time-based','OOB exfiltration via DNS','Space-filter bypass with $IFS','Windows cmd chaining','PowerShell -EncodedCommand bypass'] },
   { track:'bugbounty', cat:'ldap-injection', label:'LDAP Injection', titles:['Auth bypass','Blind attribute extraction'] },
-  { track:'bugbounty', cat:'csrf', label:'CSRF', titles:['No-token GET-based CSRF','JSON CSRF via text/plain form','SameSite=Lax top-level bypass'] },
+  { track:'bugbounty', cat:'csrf', label:'CSRF', titles:['Quick triage: does it even have CSRF protection?','No-token GET-based CSRF','JSON CSRF via text/plain form','SameSite=Lax top-level bypass'] },
   { track:'bugbounty', cat:'cors', label:'CORS', titles:['Reflected-origin probe','null origin bypass','Suffix-match regex bypass'] },
   { track:'bugbounty', cat:'idor-oauth', label:'IDOR / OAuth / ATO', titles:['IDOR via sequential ID','OAuth redirect_uri hijack','Missing state parameter (CSRF into OAuth)'] },
   { track:'bugbounty', cat:'jwt', label:'JWT', titles:['alg:none bypass','RS256 → HS256 key confusion','kid header injection','Weak-secret cracking'] },

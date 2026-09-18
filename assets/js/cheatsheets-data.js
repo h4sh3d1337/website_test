@@ -409,6 +409,9 @@ const CS_CARDS = [
     note:'Tests the password one prefix at a time by wrapping it in an AND clause — a different response for a matching vs non-matching prefix lets you brute-force the value blind.' },
 
   // ---------- csrf ----------
+  { track:'bugbounty', cat:'csrf', title:'Quick triage: does it even have CSRF protection?',
+    code:'1. Repeat the request in Burp with the CSRF/session token parameter removed entirely — still 200 = no real check.\n2. Inspect the session cookie\'s Set-Cookie flags for SameSite=Strict|Lax|None.\n3. Strip the Origin and Referer headers and resend — if the response is unchanged, that fallback defense is absent too.',
+    note:'Three checks, five minutes: no token enforced, SameSite not Strict, and no Origin/Referer validation server-side — if all three hold, the endpoint is CSRF-able and a PoC HTML form (below) is next.' },
   { track:'bugbounty', cat:'csrf', title:'No-token GET-based CSRF',
     code:'<img src="https://bank.com/transfer?to=attacker&amount=1000">',
     note:'If a sensitive action accepts GET and never checks a CSRF token or Origin header, a single auto-loading tag on any page the victim visits triggers it — no click required.' },
