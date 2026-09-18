@@ -718,9 +718,12 @@ const CS_CARDS = [
   // ================= PENTESTING =================
 
   // ---------- enumeration ----------
-  { track:'pentesting', cat:'enumeration', title:'Full TCP port scan',
-    code:'nmap -p- -sV -sC -oA full-scan {IP}',
-    note:'-p- covers all 65535 ports instead of nmap\'s default top-1000, -sC/-sV add default scripts and version detection — slower but you won\'t miss a service tucked on an odd port.' },
+  { track:'pentesting', cat:'enumeration', title:'Full TCP port scan (all-in-one)',
+    code:'nmap -p- -sC -sV --min-rate=5000 -Pn -oN full-scan.txt {IP}',
+    note:'The one-liner most people actually reach for first: -p- covers all 65535 ports, --min-rate keeps the send rate high so it doesn\'t take forever, -Pn skips host discovery (works even when ICMP is filtered, the norm on OSCP/HTB boxes), -sC/-sV add default scripts and version detection in the same pass.' },
+  { track:'pentesting', cat:'enumeration', title:'Fast full port discovery, then targeted (two-pass)',
+    code:'nmap -p- --min-rate=1000 -T4 -Pn {IP} -oN allports.txt\n# then feed only the open ports into a targeted scan:\nnmap -p<ports-found> -sC -sV -Pn {IP} -oN targeted.txt',
+    note:'The all-in-one above still runs -sC/-sV against all 65535 ports, which adds up on a slow/filtered host — splitting into a bare fast sweep first, then scripts/version detection only on the ports that came back open, is noticeably quicker when that matters.' },
   { track:'pentesting', cat:'enumeration', title:'SMB / null-session enumeration',
     code:'smbclient -L //{IP} -N\nenum4linux -a {IP}',
     note:'Anonymous/null-session SMB often leaks share names, usernames and OS version before you\'ve authenticated at all — always worth checking first on a Windows target.' },
